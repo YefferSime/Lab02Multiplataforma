@@ -1,0 +1,117 @@
+1  Crea una clase MarvelHeroes considerando lo siguiente:El personaje tendrá atributos de name y heroName
+	-El personaje se llama "Pete Parker" y su alias de superhéroe es "Spiderman"
+	-Utiliza un constructor abreviado utilizando required
+	-El mensaje en la consola será "Hola mi nombre es PETER PARKER pero me conocen como tu vecino amigable SPIDERMAN"
+	-Adjunta una pantalla de tu código
+
+class MarvelHeroes {
+  final String nombrePila;
+  final String nombrePersonaje;
+
+  MarvelHeroes({required this.nombrePila, required this.nombrePersonaje});
+
+  void presentarse() {
+    print(
+        'Hola mi nombre es ${nombrePila.toUpperCase()} pero me conocen como tu vecino amigable ${nombrePersonaje.toUpperCase()}');
+  }
+}
+
+void main() {
+  MarvelHeroes spiderman = MarvelHeroes(
+    nombrePila: 'Peter Parker',
+    nombrePersonaje: 'Spiderman',
+  );
+  spiderman.presentarse();
+}
+
+2  Crea una clase DCHeroes teniendo en cuenta lo siguiente:
+	-El personaje tendrá atributos NombrePila y NombrePersonaje.
+	-Se utilizará un mapa de datos llamado DCJson.
+	-Utilizar un constructor con nombre que se llame fromDCJson.
+	-Debe estar protegido y en caso algún dato no exista mostrar automáticamente en consola: "No tiene nombre" y "No tiene alias".
+	-El mensaje en consola sería: "Hola mi nombre es BRUCE WAYNE pero me conocen como el caballero de la noche BATMAN".
+	-Adjuntar pantalla de su código.
+
+class DCHeroes {
+  final String nombrePila;
+  final String nombrePersonaje;
+
+  DCHeroes({required this.nombrePila, required this.nombrePersonaje});
+
+  DCHeroes.fromDCJson(Map<String, dynamic> dcJson)
+      : nombrePila = dcJson['nombrePila'] ?? 'No tiene nombre',
+        nombrePersonaje = dcJson['nombrePersonaje'] ?? 'No tiene alias';
+
+  void presentarse() {
+    print(
+        'Hola mi nombre es ${nombrePila.toUpperCase()} pero me conocen como el caballero de la noche ${nombrePersonaje.toUpperCase()}');
+  }
+}
+
+void main() {
+  Map<String, dynamic> DCJson = {
+    'nombrePila': 'Bruce Wayne',
+    'nombrePersonaje': 'Batman',
+  };
+
+  DCHeroes batman = DCHeroes.fromDCJson(DCJson);
+  batman.presentarse();
+}
+
+3   En los ejemplos anteriores agregar un constructor con parámetros en cada uno de las clase y crear diferentes objetos con diferentes constructores
+
+class MarvelHeroes {
+  final String nombrePila;
+  final String nombrePersonaje;
+
+  MarvelHeroes({required this.nombrePila, required this.nombrePersonaje});
+
+  MarvelHeroes.fromNames(String nombrePila, String nombrePersonaje)
+      : this(nombrePila: nombrePila, nombrePersonaje: nombrePersonaje);
+
+  void presentarse() {
+    print(
+        'Hola mi nombre es ${nombrePila.toUpperCase()} pero me conocen como ${nombrePersonaje.toUpperCase()}');
+  }
+}
+
+class DCHeroes {
+  final String nombrePila;
+  final String nombrePersonaje;
+
+  DCHeroes({required this.nombrePila, required this.nombrePersonaje});
+
+  DCHeroes.fromDCJson(Map<String, dynamic> dcJson)
+      : nombrePila = dcJson['nombrePila'] ?? 'No tiene nombre',
+        nombrePersonaje = dcJson['nombrePersonaje'] ?? 'No tiene alias';
+
+  DCHeroes.fromNames(String nombrePila, String nombrePersonaje)
+      : this(nombrePila: nombrePila, nombrePersonaje: nombrePersonaje);
+
+  void presentarse() {
+    print(
+        'Hola mi nombre es ${nombrePila.toUpperCase()} pero me conocen como  ${nombrePersonaje.toUpperCase()}');
+  }
+}
+
+void main() {
+  MarvelHeroes spiderman = MarvelHeroes(
+    nombrePila: 'Peter Parker',
+    nombrePersonaje: 'Spiderman',
+  );
+  spiderman.presentarse();
+
+  MarvelHeroes ironMan = MarvelHeroes.fromNames('Tony Stark', 'Iron Man');
+  ironMan.presentarse();
+
+  Map<String, dynamic> batmanJson = {
+    'nombrePila': 'Bruce Wayne',
+    'nombrePersonaje': 'Batman',
+  };
+  DCHeroes batman = DCHeroes.fromDCJson(batmanJson);
+  batman.presentarse();
+
+  DCHeroes superman = DCHeroes.fromNames('Clark Kent', 'Superman');
+  superman.presentarse();
+}
+
